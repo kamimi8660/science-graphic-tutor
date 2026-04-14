@@ -22,8 +22,12 @@ def create_card(image_path, title, principles, steps, errors, test_points, outpu
                 '/usr/share/fonts/wqy-microhei/wqy-microhei.ttc',
                 '/usr/share/fonts/truetype/wqy/wqy-microhei.ttc',
                 '/usr/share/fonts/truetype/arphic/uming.ttc',
+                '/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc',
+                '/usr/share/fonts/noto-cjk/NotoSansCJK-Regular.ttc',
                 '/System/Library/Fonts/STHeiti Medium.ttc',
-                '/System/Library/Fonts/PingFang.ttc'
+                '/System/Library/Fonts/PingFang.ttc',
+                'C:/Windows/Fonts/msyh.ttc',
+                'C:/Windows/Fonts/simhei.ttf'
             ]
             for path in candidate_paths:
                 if os.path.exists(path):
@@ -32,12 +36,21 @@ def create_card(image_path, title, principles, steps, errors, test_points, outpu
             try:
                 import subprocess
                 result = subprocess.run(['fc-list', ':lang=zh', 'file'], capture_output=True, text=True)
-                if result.stdout:
-                    first_font = result.stdout.split('\n')[0].split(':')[0].strip()
-                    if os.path.exists(first_font):
-                        return first_font
+                for line in result.stdout.split('\n'):
+                    if ':' in line:
+                        potential_path = line.split(':')[0].strip()
+                        if os.path.exists(potential_path) and potential_path.lower().endswith(('.ttf', '.ttc', '.otf')):
+                            return potential_path
             except Exception:
                 pass
+            
+            # Global fallback: find ANY font in /usr/share/fonts
+            if os.path.exists('/usr/share/fonts'):
+                for root, _, files in os.walk('/usr/share/fonts'):
+                    for file in files:
+                        if file.lower().endswith(('.ttc', '.ttf')):
+                            return os.path.join(root, file)
+                            
             return None
 
         font_path = get_fallback_chinese_font()
