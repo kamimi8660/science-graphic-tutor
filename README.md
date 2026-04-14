@@ -1,10 +1,32 @@
 # 学霸理科图解卡片机 (Science Graphic Tutor) 🧬⚡🧪
 
+[![Apache 2.0 License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE.txt)
+[![Model](https://img.shields.io/badge/Model-Wan_2.7-purple)](#)
+[![Python Required](https://img.shields.io/badge/Python-3.9+-green.svg)](#)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#)
+
 这是一个基于 [Wan 2.7](https://github.com/Wan-Video/Wan2.1) 构建的自动化 AI 教学辅助工作流。
 
 只需输入一个极其抽象难懂的理科知识点，AI 就能自动联网搜索验证，并生成一幅**「教科书级科学图解 + 左侧配图右侧留白排版文字」**的 A4 打印级教学卡片，实现理科知识点的空间与视觉降维打击。
 
 支持 **涵盖小学自然科普、初高中中高考核心考点，直至大学专业的理化学科**。
+
+---
+
+## 📂 项目目录结构
+
+```text
+📦 science-graphic-tutor
+ ┣ 📂 assets                  # 存放自动生成的精美图解案例
+ ┣ 📂 skills                  
+ ┃ ┗ 📂 wan2.7-image-skill
+ ┃   ┣ 📜 SKILL_Science_Graphic_Cards.md   # [核心] AI Agent 人设与运行规则
+ ┃   ┣ 📂 scripts                          # [核心] Python 原生自动生成脚本
+ ┃   ┃ ┗ 📜 image-generation-editing.py
+ ┃   ┗ 📂 references                       # 开发测试过程存档
+ ┣ 📜 README.md               # 本使用说明
+ ┗ 📜 LICENSE.txt             # 开源协议
+```
 
 ---
 
@@ -69,11 +91,12 @@
 > 🗣️ 您只需要把这段话发给 AI：  
 > "你好！请你帮我准备并运行理科图解卡片机技能。请**你自己在终端执行**以下操作：
 > 1. 执行 `git clone https://github.com/kamimi8660/science-graphic-tutor.git` 将仓库克隆到当前目录，然后 `cd` 进去。
-> 2. 将环境变量临时设置为 `export DASHSCOPE_API_KEY="您的阿里云百炼_API_KEY"`（请注意替换我这句真实的Key，并且不要写入任何文件）。
-> 3. 静默读取 `skills/wan2.7-image-skill/SKILL_Science_Graphic_Cards.md` 这个 Markdown 文件的全部内容，并在心里默默把它作为你接下来的工作人设和操作 SOP（不准篡改规则）。
-> 4. 最后，根据你学到的卡片机规则，帮我生成一张高三物理《回旋加速器》的高频考点教学图。请你自己调用这个目录下的原生画图脚本完成出图，把成品图保存在当前文件夹给我。"
+> 2. 检查安装环境：执行 `pip install dashscope pillow` 确保依赖合法。
+> 3. 将环境变量临时设置为 `export DASHSCOPE_API_KEY="您的阿里云百炼_API_KEY"`（请注意替换我这句真实的Key，并且不要写入任何文件）。
+> 4. 静默读取 `skills/wan2.7-image-skill/SKILL_Science_Graphic_Cards.md` 这个 Markdown 文件的全部内容，并在心里默默把它作为你接下来的工作人设和操作 SOP（不准篡改规则）。
+> 5. 最后，根据你学到的卡片机规则，帮我生成一张高三物理《回旋加速器》的高频考点教学图。请你自己调用这个目录下的原生画图脚本完成出图，把成品图保存在当前文件夹给我。"
 
-*(这些高级 Agent 只要接过上面这行提示词，就会自己像个真正的程序员一样克隆代码、设环境变量、看您的文档规则、搜索考点并把图给您甩出来！)*
+*(这些高级 Agent 只要接过上面这行提示词，就会自己像个真正的程序员一样克隆代码、装依赖、设环境变量、看您的文档规则、搜索考点并把图给您甩出来！)*
 
 ---
 
@@ -84,10 +107,26 @@
 4. **填入密钥**：在平台的插件授权设置中填写 API Key。
 
 ### 方案 C：本地传统命令行硬编码调用
-直接调用原生图片生成脚本：
+对于希望将其集成到现有开发体系的技术人员：
 ```bash
+# 1. 必须优先安装运行依赖！
+pip install dashscope pillow
+
+# 2. 填入 API 密钥
 export DASHSCOPE_API_KEY="您的百炼_API_KEY"
+
+# 3. 执行原生生图挂载脚本
 python3 skills/wan2.7-image-skill/scripts/image-generation-editing.py \
   --user_requirement "Scientific textbook illustration of Projectile Motion. Diagram showing an object thrown horizontally..." \
   --size "1774*1254"
 ```
+
+---
+
+## 🤝 参与贡献与支持 (Support)
+
+如果这个自动化工作流真的帮到了您（或您的学生），给这个库点个 **⭐ Star** 将是我持续维护它的最大动力！
+
+**如有合作需求或遇到使用问题：**
+- 欢迎直接在 [Issues](https://github.com/kamimi8660/science-graphic-tutor/issues) 提出疑问。
+- 欢迎提交 PR 为支持更多学科维度贡献力量。
