@@ -59,32 +59,46 @@
 
 ## 🚀 如何使用 (部署指南)
 
-本技能完全解耦，既可以在主流 AI Agent 平台（如 Coze、Dify）一键配置成在线机器人，也可以结合本地脚本运行。
+本技能的部署形态极速、解耦。我们首推结合最前沿的底层桌面代理（如 OpenClaw / Claude Code）来进行极客式调用。
 
-### 方案 A：在 Agent 开发平台免代码部署（推荐）
-1. **创建智能体**：在 [Coze / 扣子](https://www.coze.cn/) 或 Dify 中创建一个新的 Agent。
-2. **植入大脑**：打开仓库中的 `skills/wan2.7-image-skill/SKILL_Science_Graphic_Cards.md` 文件，复制全部内容，粘贴到 Agent 的「人设与回复逻辑（System Prompt）」中。
-3. **配置插件（Plugins）**：
-   - 必选挂载：**搜索引擎插件**（用于核对理科考点的准确性）。
-   - 必选挂载：**图像生成插件**（必须支持/配置为阿里云百炼上的 Wan 2.7 API接口以保证画图效果）。
-4. **填入密钥**：在平台的插件授权设置中填写您的 API Key 即可安全调用（无需把 Key 写在代码或提示词里）。
+### 方案 A：在底层桌面端 Agent 中使用（OpenClaw / Claude Code 等）【⭐首推】
+如果您正在使用具备 MCP (Model Context Protocol) 协议或本地沙盒控制权的强大 AI 编码助手，此方案将带给您全自动的魔法体验。
 
-### 方案 B：本地命令行调用
-如果您想将工作流集成到自己的后台系统中：
-本仓库由于是 Fork 自 Wan-skills，您仍可以使用原生的图片生成脚本：
+**Step 1：安装 Skill 到本地工作区**
+将本仓库直接克隆到您需要进行教学研发的文件夹：
 ```bash
-# 1. 临时设置您的安全密钥（绝不要将其写入代码提交！）
-export DASHSCOPE_API_KEY="您的百炼_API_KEY"
+git clone https://github.com/kamimi8660/science-graphic-tutor.git
+cd science-graphic-tutor
+```
 
-# 2. 调用核心画图脚本并送入卡片机 Prompt
+**Step 2：配置环境变量**
+在终端临时暴露您的百炼调用密钥（请勿将其写入任何文件防泄露）：
+```bash
+export DASHSCOPE_API_KEY="您的阿里云百炼_API_KEY"
+```
+
+**Step 3：唤醒小龙虾 (OpenClaw/Claude) 并“植入大脑”**
+在上面打开的同一个终端里启动您的 AI 助手命令行，并要求它强制加载规则：
+> 🗣️ 您输入：“请深度读取 `skills/wan2.7-image-skill/SKILL_Science_Graphic_Cards.md` 这个 Markdown 文件，必须绝对遵循里面的规则作为你接下来的工作人设和操作 SOP。”
+
+**Step 4：下达画图指令（享受魔法落地）**
+> 🗣️ 您输入：“我是高三物理老师，帮我生成一张《回旋加速器》的高频考点教学图。请你自己调用这个目录下的相应脚本完成出图，把成品保存在当前文件夹给我。”
+
+*(由于这些高级工具本身具有联网检索与脚本执行权限，它们会按照规则自主核对物理公式、调用万象 API 并生成合图。)*
+
+---
+
+### 方案 B：在 Agent 开发平台免代码部署（非程序员选项）
+1. **创建智能体**：打开 [Coze / 扣子](https://www.coze.cn/) 或 Dify 创建一个新的 Agent。
+2. **植入大脑**：打开仓库中的 `skills/wan2.7-image-skill/SKILL_Science_Graphic_Cards.md`，复制全部内容，直接粘贴为主体的「人设与回复逻辑（System Prompt）」。
+3. **配置插件（Plugins）**：必选挂载「搜索引擎插件」与「Wan2.7 图像生成插件」。
+4. **填入密钥**：在平台的插件授权设置中填写 API Key。
+
+### 方案 C：本地传统命令行硬编码调用
+直接调用原生图片生成脚本：
+```bash
+export DASHSCOPE_API_KEY="您的百炼_API_KEY"
 python3 skills/wan2.7-image-skill/scripts/image-generation-editing.py \
   --user_requirement "Scientific textbook illustration of Projectile Motion. Diagram showing an object thrown horizontally..." \
   --size "1774*1254"
 ```
-
-### 方案 C：在 AI 编程助手与桌面端工具中使用 (Claude Code / OpenClaw 等)
-如果您正在使用具备 MCP (Model Context Protocol) 或系统访问权限的 AI 助手（如 Claude Code、OpenClaw 等），可以让 AI 直接读取并运行这套工作流：
-1. **进入工作区**：让您的终端在 `Wan-skills` 仓库目录就绪。
-2. **喂给大脑**：直接跟 AI 说：“请读取 `skills/wan2.7-image-skill/SKILL_Science_Graphic_Cards.md` 这个 Markdown 文件的内容，并将其作为你接下来思考和行动的规则”。
-3. **下达任务**：您可以直接吩咐 AI：“请根据卡片机规则，帮我生成一张高三物理《回旋加速器》的高频考点图，调用本目录的相关脚本和能力完成出图并保存在当前文件夹”。
-*(由于这些高级工具本身具有联网与脚本执行权限，它们能自主代您完成搜索验证、调用万象 API 并生成图片的端到端任务！)*
