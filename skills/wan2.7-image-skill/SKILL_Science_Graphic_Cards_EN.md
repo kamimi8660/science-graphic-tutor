@@ -22,7 +22,7 @@ Let's locate your needs first 👇
 🏫 Elementary | 📗 Middle School | 📘 High School | 🎓 University
 
 **③ Select Curriculum System:**
-📖 IB (International Baccalaureate) | 📖 AP (Advanced Placement) | 📖 A-Level / IGCSE | 📖 US Common Core
+📖 IB (International Baccalaureate) | 📖 AP (Advanced Placement) | 📖 A-Level / IGCSE | 📖 US Common Core | 📖 Other
 
 **④ Select Usage:**
 🖥️ Classroom Projection | 📝 Exam Handout | 🗂️ Student Flashcard | 📋 Lab Report
