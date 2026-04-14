@@ -38,9 +38,27 @@
 
 ---
 
-## 🚀 如何使用
+## 🚀 如何使用 (部署指南)
 
-1. 打开 `skills/wan2.7-image-skill/SKILL_Science_Graphic_Cards.md`。
-2. 复制里边的两百多字核心 Prompt。
-3. 粘贴到任意主流大模型 Agent 开发平台（如 Coze 扣子 等）的角色设定中。
-4. 提供您的 Wan2.7 API 接口服务，即插即用！
+本技能完全解耦，既可以在主流 AI Agent 平台（如 Coze、Dify）一键配置成在线机器人，也可以结合本地脚本运行。
+
+### 方案 A：在 Agent 开发平台免代码部署（推荐）
+1. **创建智能体**：在 [Coze / 扣子](https://www.coze.cn/) 或 Dify 中创建一个新的 Agent。
+2. **植入大脑**：打开仓库中的 `skills/wan2.7-image-skill/SKILL_Science_Graphic_Cards.md` 文件，复制全部内容，粘贴到 Agent 的「人设与回复逻辑（System Prompt）」中。
+3. **配置插件（Plugins）**：
+   - 必选挂载：**搜索引擎插件**（用于核对理科考点的准确性）。
+   - 必选挂载：**图像生成插件**（必须支持/配置为阿里云百炼上的 Wan 2.7 API接口以保证画图效果）。
+4. **填入密钥**：在平台的插件授权设置中填写您的 API Key 即可安全调用（无需把 Key 写在代码或提示词里）。
+
+### 方案 B：本地命令行调用
+如果您想将工作流集成到自己的后台系统中：
+本仓库由于是 Fork 自 Wan-skills，您仍可以使用原生的图片生成脚本：
+```bash
+# 1. 临时设置您的安全密钥（绝不要将其写入代码提交！）
+export DASHSCOPE_API_KEY="您的百炼_API_KEY"
+
+# 2. 调用核心画图脚本并送入卡片机 Prompt
+python3 skills/wan2.7-image-skill/scripts/image-generation-editing.py \
+  --user_requirement "Scientific textbook illustration of Projectile Motion. Diagram showing an object thrown horizontally..." \
+  --size "1774*1254"
+```
