@@ -12,7 +12,7 @@ def create_card(image_path, title, principles, steps, errors, test_points, outpu
         ratio = max(left_w / base_img.width, TARGET_H / base_img.height)
         new_w, new_h = int(base_img.width * ratio), int(base_img.height * ratio)
         base_img = base_img.resize((new_w, new_h), Image.Resampling.LANCZOS)
-        cx, cy = (new_w - left_w) // 2, (new_h - TARGET_H) // 2
+        cx, cy = 0, (new_h - TARGET_H) // 2
         base_img = base_img.crop((cx, cy, cx + left_w, cy + TARGET_H))
         
         final_img = Image.new('RGB', (TARGET_W, TARGET_H), (255, 255, 255))
