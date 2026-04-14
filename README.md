@@ -1,5 +1,7 @@
 # 学霸理科图解卡片机 —— 万象 Wan 2.7 进阶应用技能 (Skill) 🧬⚡🧪
 
+[**🇨🇳 中文**](./README.md) | [**🇬🇧 English**](./README_EN.md)
+
 [![Type](https://img.shields.io/badge/Type-Wan_Skill-orange)](#)
 [![Apache 2.0 License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE.txt)
 [![Model](https://img.shields.io/badge/Model-Wan_2.7-purple)](#)
@@ -22,11 +24,13 @@
  ┣ 📂 assets                  # 存放自动生成的精美图解案例
  ┣ 📂 skills                  
  ┃ ┗ 📂 wan2.7-image-skill
- ┃   ┣ 📜 SKILL_Science_Graphic_Cards.md   # [核心] AI Agent 人设与运行规则
- ┃   ┣ 📂 scripts                          # [核心] Python 原生自动生成脚本
+ ┃   ┣ 📜 SKILL_Science_Graphic_Cards.md      # [核心] AI Agent 人设与运行规则 (中文)
+ ┃   ┣ 📜 SKILL_Science_Graphic_Cards_EN.md   # [核心] AI Agent 人设与运行规则 (英文)
+ ┃   ┣ 📂 scripts                             # [核心] Python 原生自动生成脚本
  ┃   ┃ ┗ 📜 image-generation-editing.py
- ┃   ┗ 📂 references                       # 开发测试过程存档
- ┣ 📜 README.md               # 本使用说明
+ ┃   ┗ 📂 references                          # 开发测试过程存档
+ ┣ 📜 README.md               # 中文说明
+ ┣ 📜 README_EN.md            # 英文说明
  ┗ 📜 LICENSE.txt             # 开源协议
 ```
 
