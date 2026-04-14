@@ -81,3 +81,10 @@ python3 skills/wan2.7-image-skill/scripts/image-generation-editing.py \
   --user_requirement "Scientific textbook illustration of Projectile Motion. Diagram showing an object thrown horizontally..." \
   --size "1774*1254"
 ```
+
+### 方案 C：在 AI 编程助手与桌面端工具中使用 (Claude Code / OpenClaw 等)
+如果您正在使用具备 MCP (Model Context Protocol) 或系统访问权限的 AI 助手（如 Claude Code、OpenClaw 等），可以让 AI 直接读取并运行这套工作流：
+1. **进入工作区**：让您的终端在 `Wan-skills` 仓库目录就绪。
+2. **喂给大脑**：直接跟 AI 说：“请读取 `skills/wan2.7-image-skill/SKILL_Science_Graphic_Cards.md` 这个 Markdown 文件的内容，并将其作为你接下来思考和行动的规则”。
+3. **下达任务**：您可以直接吩咐 AI：“请根据卡片机规则，帮我生成一张高三物理《回旋加速器》的高频考点图，调用本目录的相关脚本和能力完成出图并保存在当前文件夹”。
+*(由于这些高级工具本身具有联网与脚本执行权限，它们能自主代您完成搜索验证、调用万象 API 并生成图片的端到端任务！)*
