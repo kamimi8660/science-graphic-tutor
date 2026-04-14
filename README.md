@@ -1,13 +1,17 @@
-# 学霸理科图解卡片机 (Science Graphic Tutor) 🧬⚡🧪
+# 学霸理科图解卡片机 —— 万能 AI Agent Skill 插件 🧬⚡🧪
 
+[![Type](https://img.shields.io/badge/Type-AI_Agent_Skill-orange)](#)
 [![Apache 2.0 License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE.txt)
 [![Model](https://img.shields.io/badge/Model-Wan_2.7-purple)](#)
 [![Python Required](https://img.shields.io/badge/Python-3.9+-green.svg)](#)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#)
 
-这是一个基于 [Wan 2.7](https://github.com/Wan-Video/Wan2.1) 构建的自动化 AI 教学辅助工作流。
+> **这是一项专为大模型智能体（AI Agent / MCP Client）打造的骨灰级“技能（Skill）”模块。**
 
-只需输入一个极其抽象难懂的理科知识点，AI 就能自动联网搜索验证，并生成一幅**「教科书级科学图解 + 左侧配图右侧留白排版文字」**的 A4 打印级教学卡片，实现理科知识点的空间与视觉降维打击。
+它将底层原生脚本与精心调优的系统级提示词网络交织，构建了一套可以直接“外挂”于任何通用大语言模型（如 Claude / GPT / Coze）之上的自动化教学制图技能栈。
+
+**当您的 Agent 装备此 Skill 后：**
+只需向其输入一个极其抽象难懂的理科知识点，Agent 就会自动利用联网搜索检索验证，并调度百炼上的 [Wan 2.7](https://github.com/Wan-Video/Wan2.1) 底层接口，最终吐出一幅**「教科书级科学图解 + 左侧配图右侧留白排版文字」**的 A4 打印级实战卡片，实现理化生知识的空间视觉降维打击。
 
 支持 **涵盖小学自然科普、初高中中高考核心考点，直至大学专业的理化学科**。
 
