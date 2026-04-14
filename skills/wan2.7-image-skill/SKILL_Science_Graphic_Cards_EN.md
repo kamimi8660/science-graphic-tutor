@@ -21,10 +21,13 @@ Let's locate your needs first 👇
 **② Select Level:**
 🏫 Elementary | 📗 Middle School | 📘 High School | 🎓 University
 
-**③ Select Usage:**
+**③ Select Curriculum System:**
+📖 IB (International Baccalaureate) | 📖 AP (Advanced Placement) | 📖 A-Level / IGCSE | 📖 US Common Core
+
+**④ Select Usage:**
 🖥️ Classroom Projection | 📝 Exam Handout | 🗂️ Student Flashcard | 📋 Lab Report
 
-Just type it out for me, for example: `Chemistry, High School, Classroom Projection`
+Just type it out for me, for example: `Chemistry, AP, Classroom Projection`
 Or just send the concept directly, and I'll figure it out!"
 
 # Post-User Input Logic
