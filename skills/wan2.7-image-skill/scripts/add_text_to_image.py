@@ -12,12 +12,43 @@ def create_card(image_path, title, principles, steps, errors, test_points, outpu
         
         draw = ImageDraw.Draw(base_img)
         
-        # Use PingFang SC which is standard on Chinese macOS
-        font_path = "/System/Library/Fonts/STHeiti Medium.ttc"
+        # Force right 45% to pure white background
+        draw.rectangle([(text_area_x, 0), (img_w, img_h)], fill=(255, 255, 255))
+        draw.line([(text_area_x, 0), (text_area_x, img_h)], fill=(210, 210, 210), width=2)
+        
+        import os
+        def get_fallback_chinese_font():
+            candidate_paths = [
+                '/usr/share/fonts/wqy-microhei/wqy-microhei.ttc',
+                '/usr/share/fonts/truetype/wqy/wqy-microhei.ttc',
+                '/usr/share/fonts/truetype/arphic/uming.ttc',
+                '/System/Library/Fonts/STHeiti Medium.ttc',
+                '/System/Library/Fonts/PingFang.ttc'
+            ]
+            for path in candidate_paths:
+                if os.path.exists(path):
+                    return path
+            
+            try:
+                import subprocess
+                result = subprocess.run(['fc-list', ':lang=zh', 'file'], capture_output=True, text=True)
+                if result.stdout:
+                    first_font = result.stdout.split('\n')[0].split(':')[0].strip()
+                    if os.path.exists(first_font):
+                        return first_font
+            except Exception:
+                pass
+            return None
+
+        font_path = get_fallback_chinese_font()
+        
         try:
-            font_title = ImageFont.truetype(font_path, 42)
-            font_heading = ImageFont.truetype(font_path, 32)
-            font_body = ImageFont.truetype("/System/Library/Fonts/STHeiti Light.ttc", 24)
+            if font_path:
+                font_title = ImageFont.truetype(font_path, 42)
+                font_heading = ImageFont.truetype(font_path, 32)
+                font_body = ImageFont.truetype(font_path, 24)
+            else:
+                raise Exception("No fallback Chinese font could be found on this system.")
         except Exception as e:
             print(f"Font loading error: {e}")
             font_title = ImageFont.load_default()
@@ -30,7 +61,7 @@ def create_card(image_path, title, principles, steps, errors, test_points, outpu
         
         current_y = 80
         
-        draw.text((text_area_x, current_y), f"📖 {title}", font=font_title, fill=color_primary)
+        draw.text((text_area_x, current_y), title, font=font_title, fill=color_primary)
         current_y += 80
 
         def draw_section(heading, content, y_pos):
@@ -43,10 +74,10 @@ def create_card(image_path, title, principles, steps, errors, test_points, outpu
                 y_pos += 38
             return y_pos + 25
             
-        current_y = draw_section("📝 核心原理", principles, current_y)
-        current_y = draw_section("🔬 关键要素", steps, current_y)
-        current_y = draw_section("⚠️ 易错警示", errors, current_y)
-        current_y = draw_section("🎯 考试高频", test_points, current_y)
+        current_y = draw_section("核心原理", principles, current_y)
+        current_y = draw_section("关键要素", steps, current_y)
+        current_y = draw_section("易错警示", errors, current_y)
+        current_y = draw_section("考试高频", test_points, current_y)
 
         base_img.save(output_path)
         print(f"Successfully generated full card at {output_path}")
