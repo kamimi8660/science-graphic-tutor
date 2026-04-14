@@ -1,59 +1,60 @@
-import argparse
 from PIL import Image, ImageDraw, ImageFont
+import argparse
 import textwrap
 
-def draw_text(image_path, title, principles, steps, errors, points, output_path):
-    img = Image.open(image_path)
-    if img.mode != 'RGB':
-        img = img.convert('RGB')
-    draw = ImageDraw.Draw(img)
-    width, height = img.size
-    
-    # FORCE white background on the right 50% in case the model failed to leave it pure white
-    split_x = int(width * 0.50)
-    draw.rectangle([(split_x, 0), (width, height)], fill=(255, 255, 255))
-    # Draw vertical separator
-    draw.line([(split_x, 0), (split_x, height)], fill=(200, 200, 200), width=2)
-    
-    start_x = int(width * 0.54)
-    margin_y = int(height * 0.1)
-    max_width = int(width * 0.42)
-    
+def create_card(image_path, title, principles, steps, errors, test_points, output_path):
     try:
-        font_title = ImageFont.truetype("/System/Library/Fonts/PingFang.ttc", 60)
-        font_header = ImageFont.truetype("/System/Library/Fonts/PingFang.ttc", 40)
-        font_body = ImageFont.truetype("/System/Library/Fonts/PingFang.ttc", 30)
-    except IOError:
-        font_title = ImageFont.load_default()
-        font_header = ImageFont.load_default()
-        font_body = ImageFont.load_default()
-
-    current_y = margin_y
-    
-    def write_block(header, text, y_pos, header_color=(200, 50, 50), body_color=(80, 80, 80)):
-        if header:
-            draw.text((start_x, y_pos), header, font=font_header, fill=header_color)
-            y_pos += 60
-        if text:
-            # English/Chinese text wrap approximation
-            chars_per_line = max_width // 30
-            lines = textwrap.wrap(text, width=chars_per_line)
-            for line in lines:
-                draw.text((start_x, y_pos), line, font=font_body, fill=body_color)
-                y_pos += 45
-        return y_pos + 40
-
-    # Title
-    draw.text((start_x, current_y), f"{title}", font=font_title, fill=(50, 50, 50))
-    current_y += 100
-    
-    current_y = write_block("核心原理", principles, current_y)
-    current_y = write_block("关键要素", steps, current_y)
-    current_y = write_block("易错警示", errors, current_y)
-    if points and points.strip():
-        current_y = write_block("考试高频", points, current_y)
+        base_img = Image.open(image_path)
+        img_w, img_h = base_img.size
         
-    img.save(output_path)
+        text_area_x = int(img_w * 0.55)
+        text_area_w = int(img_w * 0.40)
+        
+        draw = ImageDraw.Draw(base_img)
+        
+        # Use PingFang SC which is standard on Chinese macOS
+        font_path = "/System/Library/Fonts/STHeiti Medium.ttc"
+        try:
+            font_title = ImageFont.truetype(font_path, 42)
+            font_heading = ImageFont.truetype(font_path, 32)
+            font_body = ImageFont.truetype("/System/Library/Fonts/STHeiti Light.ttc", 24)
+        except Exception as e:
+            print(f"Font loading error: {e}")
+            font_title = ImageFont.load_default()
+            font_heading = ImageFont.load_default()
+            font_body = ImageFont.load_default()
+
+        color_primary = (40, 40, 44)    
+        color_accent = (210, 60, 60)
+        color_secondary = (70, 70, 75)
+        
+        current_y = 80
+        
+        draw.text((text_area_x, current_y), f"📖 {title}", font=font_title, fill=color_primary)
+        current_y += 80
+
+        def draw_section(heading, content, y_pos):
+            draw.text((text_area_x, y_pos), heading, font=font_heading, fill=color_accent)
+            y_pos += 45
+            
+            lines = textwrap.wrap(content, width=22) 
+            for line in lines:
+                draw.text((text_area_x, y_pos), line, font=font_body, fill=color_secondary)
+                y_pos += 38
+            return y_pos + 25
+            
+        current_y = draw_section("📝 核心原理", principles, current_y)
+        current_y = draw_section("🔬 关键要素", steps, current_y)
+        current_y = draw_section("⚠️ 易错警示", errors, current_y)
+        current_y = draw_section("🎯 考试高频", test_points, current_y)
+
+        base_img.save(output_path)
+        print(f"Successfully generated full card at {output_path}")
+        return True
+        
+    except Exception as e:
+        print(f"Error creating card: {e}")
+        return False
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -62,7 +63,7 @@ if __name__ == "__main__":
     parser.add_argument("--principles", required=True)
     parser.add_argument("--steps", required=True)
     parser.add_argument("--errors", required=True)
-    parser.add_argument("--points", default="")
+    parser.add_argument("--points", required=True)
     parser.add_argument("--output", required=True)
     args = parser.parse_args()
-    draw_text(args.image, args.title, args.principles, args.steps, args.errors, args.points, args.output)
+    create_card(args.image, args.title, args.principles, args.steps, args.errors, args.points, args.output)
