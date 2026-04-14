@@ -1,91 +1,46 @@
-# Wan-skills
-> AI Agent Skills for Wan — Enable your AI Agent to easily leverage Wan's AIGC capabilities.
----
-## 🌟 Core Capabilities
-**Wan-skills** is a suite of skills designed for AI Agents, empowering them with AIGC capabilities through API calls.
+# 学霸理科图解卡片机 (Science Graphic Tutor) 🧬⚡🧪
 
-**Skills List**
+这是一个基于 [Wan 2.7](https://github.com/Wan-Video/Wan2.1) 构建的自动化 AI 教学辅助工作流。
 
-| name | description | scripts | refenence |
-|------|------|------|------|
-| **wan2.7-image-skill** | Create content using the image generation and editing capabilities of the wan2.7-image model. | `image-generation-editing.py` `file_to_oss.py` `parse_resolution.py` `check_wan_task_status.py` | `common.md` `image-generation-editing.md` |
+只需输入一个极其抽象难懂的理科知识点，AI 就能自动联网搜索验证，并生成一幅**「教科书级科学图解 + 左侧配图右侧留白排版文字」**的 A4 打印级教学卡片，实现理科知识点的空间与视觉降维打击。
 
-Continuously update the skill list with a variety of new skills.
+支持 **涵盖小学自然科普、初高中中高考核心考点，直至大学专业的理化学科**。
 
 ---
 
-## 🚀 Quick Start
+## ✨ 核心亮点
 
-### Step 1: Get API Key
-
-**Prerequisites:** An Alibaba Cloud account is required
-
-1. **Sign up for an Alibaba Cloud account**
-   - visit https://www.aliyun.com/
-   - Complete account registration
-
-2. **Activate ModelStudio Service**
-   - visit https://modelstudio.console.aliyun.com/
-   - Activate the ModelStudio service
-
-3. **create API Key**
-   - Go to the ModelStudio Console → API Key Management
-   - create new API Key
-
-### Step 2: Configure environment variables
-
-```bash
-export DASHSCOPE_API_KEY="your-access-key"
-```
-
-**Region selection**
-
-Select the appropriate `DASHSCOPE_BASE_URL` based on your region.
-```bash
-# Chinese Mainland (Beijing) - default
-export DASHSCOPE_BASE_URL="https://dashscope.aliyuncs.com/api/v1/"
-
-# Singapore (Uncomment to use)
-# export DASHSCOPE_BASE_URL="https://dashscope-intl.aliyuncs.com/api/v1/"
-```
-
-### Step 3: Install skill
-
-After cloning this repo, specify the installation of the corresponding skill in the AI Agent's chat interface, using wan2.7-image-skill as an example:
-
-clone this repo
-```bash
-git clone https://github.com/Wan-Video/Wan-skills.git
-```
-
-Specify the skill path in the AI Agent chat interface for installation, where `/path/to/` is the actual local path on the user's machine.
-
-```
-Install the skill from this directory  /path/to/Wan-skills/skills/wan2.7-image-skill
-```
-
-## 📂 Project Structure
-
-```
-Wan-skills/
-├── README.md
-├── LICENSE
-└── skills/
-    └── wan2.7-image-skill/                     # wan2.7-image image generation and editing skill
-        ├── references
-        │   ├── common.md                       # General configuration documentation
-        │   └── image-generation-editing.md     # Detailed usage documentation
-        ├── scripts
-        │   ├── check_wan_task_status.py        # Asynchronous task status query script
-        │   ├── file_to_oss.py                  # File upload script
-        │   ├── image-generation-editing.py     # Core generation script
-        │   └── parse_resolution.py             # Resolution parsing script
-        └── SKILL.md                            # Skill description file
-```
+- 🎨 **极致绘图质量**：得益于 Wan 2.7 卓越的模型底座，生成的科学图解逻辑精准、结构清晰，绝非普通的大模型“光影乱炖”。
+- 🧠 **考点高度提炼**：拒绝大段枯燥文字，所有输出经过严格筛选，仅保留【核心原理】、【关键步骤】与经实战检验的【易错警示】，专治“看懂图但不会做题”。
+- 🖨️ **图文黄金排版**：预装指令控制出图呈现 16:9 或 A4 横版比例，强制左侧 55% 画面留给插图，右侧 45% 留白用于知识点叠写，随时可用作课堂投屏或学生考前速记。
 
 ---
 
-## API Reference Documentation
-[Wan2.7 - image generation and editing](https://modelstudio.console.alibabacloud.com/ap-southeast-1?tab=api#/api/?type=model&url=3026980)
+## 🖼️ 生成案例实测展示
 
-[万相-图像生成与编辑2.7](https://bailian.console.aliyun.com/cn-beijing?tab=api#/api/?type=model&url=3026980)
+我们在各个学段和学科中摘取了一些最难的“硬骨头”知识点进行了自动化生成测试，效果如下：
+
+### 1. 高中化学选修 —— 原电池与电解池（双池串联模型）
+把电子的流动过程和离子的迁移方向用最直观的双池模式拆解，治愈电化学懵逼症。
+![原电池与电解池](assets/electrochem_final.png)
+
+### 2. 高中物理必修 —— 平抛运动规律
+将物理的速度矢量分解与抛物轨迹具象化，直接标注在空中拦截点上。
+![平抛运动](assets/projectile_final.png)
+
+### 3. 大学有机化学 —— SN2 亲核取代反应机理
+三维空间中展示亲核试剂的背面进攻以及由于过渡态带来的立体构型“雨伞翻转”(Walden Inversion)。
+![SN2 反应机理](assets/sn2_final.png)
+
+### 4. 初中生物启蒙 —— 动植物细胞结构对比
+使用三维切面模型对比展示生物体内最小生命单位的区别，初中生也能秒懂液泡与细胞壁对细胞硬度的影响。
+![动植物细胞](assets/cell_final.png)
+
+---
+
+## 🚀 如何使用
+
+1. 打开 `skills/wan2.7-image-skill/SKILL_Science_Graphic_Cards.md`。
+2. 复制里边的两百多字核心 Prompt。
+3. 粘贴到任意主流大模型 Agent 开发平台（如 Coze 扣子 等）的角色设定中。
+4. 提供您的 Wan2.7 API 接口服务，即插即用！
