@@ -62,29 +62,18 @@
 本技能的部署形态极速、解耦。我们首推结合最前沿的底层桌面代理（如 OpenClaw / Claude Code）来进行极客式调用。
 
 ### 方案 A：在底层桌面端 Agent 中使用（OpenClaw / Claude Code 等）【⭐首推】
-如果您正在使用具备 MCP (Model Context Protocol) 协议或本地沙盒控制权的强大 AI 编码助手，此方案将带给您全自动的魔法体验。
+如果您正在使用具备 MCP (Model Context Protocol) 协议或本地沙盒控制权的强大 AI 编码助手，您**全程不需要自己手敲代码**。
 
-**Step 1：安装 Skill 到本地工作区**
-将本仓库直接克隆到您需要进行教学研发的文件夹：
-```bash
-git clone https://github.com/kamimi8660/science-graphic-tutor.git
-cd science-graphic-tutor
-```
+直接复制以下整段话发给您的小龙虾 (OpenClaw) 或 Claude Code，让 AI 代替您完成全部部署和生成：
 
-**Step 2：配置环境变量**
-在终端临时暴露您的百炼调用密钥（请勿将其写入任何文件防泄露）：
-```bash
-export DASHSCOPE_API_KEY="您的阿里云百炼_API_KEY"
-```
+> 🗣️ 您只需要把这段话发给 AI：  
+> "你好！请你帮我准备并运行理科图解卡片机技能。请**你自己在终端执行**以下操作：
+> 1. 执行 `git clone https://github.com/kamimi8660/science-graphic-tutor.git` 将仓库克隆到当前目录，然后 `cd` 进去。
+> 2. 将环境变量临时设置为 `export DASHSCOPE_API_KEY="您的阿里云百炼_API_KEY"`（请注意替换我这句真实的Key，并且不要写入任何文件）。
+> 3. 静默读取 `skills/wan2.7-image-skill/SKILL_Science_Graphic_Cards.md` 这个 Markdown 文件的全部内容，并在心里默默把它作为你接下来的工作人设和操作 SOP（不准篡改规则）。
+> 4. 最后，根据你学到的卡片机规则，帮我生成一张高三物理《回旋加速器》的高频考点教学图。请你自己调用这个目录下的原生画图脚本完成出图，把成品图保存在当前文件夹给我。"
 
-**Step 3：唤醒小龙虾 (OpenClaw/Claude) 并“植入大脑”**
-在上面打开的同一个终端里启动您的 AI 助手命令行，并要求它强制加载规则：
-> 🗣️ 您输入：“请深度读取 `skills/wan2.7-image-skill/SKILL_Science_Graphic_Cards.md` 这个 Markdown 文件，必须绝对遵循里面的规则作为你接下来的工作人设和操作 SOP。”
-
-**Step 4：下达画图指令（享受魔法落地）**
-> 🗣️ 您输入：“我是高三物理老师，帮我生成一张《回旋加速器》的高频考点教学图。请你自己调用这个目录下的相应脚本完成出图，把成品保存在当前文件夹给我。”
-
-*(由于这些高级工具本身具有联网检索与脚本执行权限，它们会按照规则自主核对物理公式、调用万象 API 并生成合图。)*
+*(这些高级 Agent 只要接过上面这行提示词，就会自己像个真正的程序员一样克隆代码、设环境变量、看您的文档规则、搜索考点并把图给您甩出来！)*
 
 ---
 
