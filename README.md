@@ -1,19 +1,17 @@
-# 学霸理科图解卡片机 —— 万能 AI Agent Skill 插件 🧬⚡🧪
+# 学霸理科图解卡片机 —— 万象 Wan 2.7 进阶应用技能 (Skill) 🧬⚡🧪
 
-[![Type](https://img.shields.io/badge/Type-AI_Agent_Skill-orange)](#)
+[![Type](https://img.shields.io/badge/Type-Wan_Skill-orange)](#)
 [![Apache 2.0 License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE.txt)
 [![Model](https://img.shields.io/badge/Model-Wan_2.7-purple)](#)
 [![Python Required](https://img.shields.io/badge/Python-3.9+-green.svg)](#)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#)
 
-> **这是一项专为大模型智能体（AI Agent / MCP Client）打造的骨灰级“技能（Skill）”模块。**
+> **什么是 Skill？** 本项目不仅仅是一段生图代码，而是一套将 **Wan 2.7 大模型** 的原生影像生成能力进行“产品化封装”的独立功能模块（Prompt 提示词栈 + 自动化流）。我们将复杂的提示词工程和图像排版黑盒化，封装成了随取随用的**「技能包」**。
 
-它将底层原生脚本与精心调优的系统级提示词网络交织，构建了一套可以直接“外挂”于任何通用大语言模型（如 Claude / GPT / Coze）之上的自动化教学制图技能栈。
+**核心应用场景：自动生成理化生“考点回顾卡片”**
+当您的 AI 助手或后台系统挂载了本 Skill 后：不仅能直接调度 Wan 2.7 画出极具空间感的科学图解模型，还能自动预留留白、提取核心考点与易错警示进行排版。最终输出的是一张可以直接打印或投屏的**A4画幅「图文一体化教科书级讲义」**。
 
-**当您的 Agent 装备此 Skill 后：**
-只需向其输入一个极其抽象难懂的理科知识点，Agent 就会自动利用联网搜索检索验证，并调度百炼上的 [Wan 2.7](https://github.com/Wan-Video/Wan2.1) 底层接口，最终吐出一幅**「教科书级科学图解 + 左侧配图右侧留白排版文字」**的 A4 打印级实战卡片，实现理化生知识的空间视觉降维打击。
-
-支持 **涵盖小学自然科普、初高中中高考核心考点，直至大学专业的理化学科**。
+支持 **涵盖小学科普启蒙、中高考重难点，直至大学核心专业的自然科学全学科**。
 
 ---
 
